@@ -19,3 +19,8 @@ class InsurancePolicySerializer(serializers.ModelSerializer):
     class Meta:
         model = InsurancePolicy
         fields = '__all__'
+        
+class SupportingDocumentUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClaimsSubmission
+        fields = ['supporting_documents']

@@ -12,8 +12,8 @@ schema_view = get_schema_view(
         title="Insurance API",
         default_version='v1',
         description="API for managing Insurance Policies and Claims Submissions",
-        terms_of_service="https://yourdomain.com/terms/",
-        contact=openapi.Contact(email="support@yourdomain.com"),
+        
+        
         license=openapi.License(name="BSD License"),
     ),
     public=True,
