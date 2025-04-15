@@ -1,0 +1,69 @@
+<!-- templates/submit_claim.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Insurance Claim</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title has-text-centered">Insurance Claim Submission</h1>
+            
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% for field in form.visible_fields %}
+                <div class="field">
+                    <label class="label">{{ field.label }}</label>
+                    <div class="control">
+                        {{ field }}
+                    </div>
+                    {% if field.errors %}
+                        <p class="help is-danger">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-link" type="submit">Submit Claim</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% if messages %}
+  <div class="modal is-active" id="success-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head has-background-success-light">
+        <p class="modal-card-title">Submission Received</p>
+        <button class="delete" aria-label="close" id="close-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" id="close-button">Okay</button>
+      </footer>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('success-modal');
+      const closeModal = () => {
+        modal.classList.remove('is-active');
+      };
+  
+      document.getElementById('close-modal')?.addEventListener('click', closeModal);
+      document.getElementById('close-button')?.addEventListener('click', closeModal);
+    });
+  </script>
+  
+</body>
+</html>
